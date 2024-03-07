@@ -4,7 +4,7 @@ const cors = require('cors')();*/
 const express = require('express');
 const app = require('express')();
 const server = require('http').createServer(app);
-//const connection = require('./lib/conn.js');
+const connection = require('./lib/conn.js');
 const logger = require('morgan');
 const cors = require('cors')
 
