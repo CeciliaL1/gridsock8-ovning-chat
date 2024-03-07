@@ -4,7 +4,7 @@ import { formDiv } from './main.js';
 
 
 export function printchat(){
-  const socket = io('http://localhost:3000');
+  const socket = io('https://shark-app-orr5n.ondigitalocean.app/');
 
   let sendMsg = document.createElement('input');
   sendMsg.placeholder = 'Skriv ditt meddelande';
