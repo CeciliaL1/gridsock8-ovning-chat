@@ -23,7 +23,7 @@ const io = require('socket.io')(server, {
     }
 })
 
-const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/users.js');
 
 app.use(cors());
 app.use(logger('dev'));
@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
     res.send('detta funkar')
 })
 
-app.use('api/users', usersRouter);
+app.use('/api/users', usersRouter);
 
 io.on('connection', function(socket) {
     //console.log("lyckad kopplad", socket);
