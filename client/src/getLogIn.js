@@ -6,7 +6,7 @@ import { logOutBtn } from "./printLogOutBtn.js";
 export function getLogIn(email, password, message) {
     let checkLogIn = {userEmail: email, userPassword: password}
 
-    fetch('https://shark-app-orr5n.ondigitalocean.app/api/users/login', {
+    fetch('https://shark-app-orr5n.ondigitalocean.app//api/users/login', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
