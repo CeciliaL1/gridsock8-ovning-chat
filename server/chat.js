@@ -6,7 +6,8 @@ const app = require('express')();
 const server = require('http').createServer(app);
 const connection = require('./lib/conn.js');
 const logger = require('morgan');
-const cors = require('cors')
+const cors = require('cors');
+const { randomUUID } = require('crypto');
 
 
 connection.connect(function(err){
@@ -37,23 +38,7 @@ app.get('/', (req, res) => {
 
 //app.use('/api/users', usersRouter);
 
-io.on('connection', function(socket) {
-    //console.log("lyckad kopplad", socket);
 
-    socket.emit("chat", "hello world")
-
-    socket.on("chat", (arg) =>{
-        console.log("kommande chat", arg);
-        io.emit("chat", arg);
-    })
-
-    socket.on("disconnect", function () {
-        console.log("Användare frånkopplad");
-    })
-})
-
-
-const { randomUUID } = require('crypto');
 
 
 /* GET all users*/ 
@@ -155,5 +140,24 @@ app.post('/users/add', function(req, res) {
     res.json({ message: "Your account has been created"});
   })
 })
+
+
+
+io.on('connection', function(socket) {
+    //console.log("lyckad kopplad", socket);
+
+    socket.emit("chat", "hello world")
+
+    socket.on("chat", (arg) =>{
+        console.log("kommande chat", arg);
+        io.emit("chat", arg);
+    })
+
+    socket.on("disconnect", function () {
+        console.log("Användare frånkopplad");
+    })
+})
+
+
 
 server.listen(process.env.PORT || '3000');

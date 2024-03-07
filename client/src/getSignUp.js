@@ -17,7 +17,7 @@ export function getSignUp(username, email, password, textColour, message) {
             message.textContent = ''
          }, 2000)
     } else {
-        fetch('https://shark-app-orr5n.ondigitalocean.app/api/users/add', {
+        fetch('https://shark-app-orr5n.ondigitalocean.app/users/add', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
