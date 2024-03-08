@@ -19,21 +19,37 @@ const io = require('socket.io')(server, {
     }
 })
 
-const usersRouter = require('./routes/users.js');
+//const usersRouter = require('./routes/users.js');
 
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 
 
-app.use('/api/users', usersRouter);
+//app.use('/api/users', usersRouter);
 
+app.get('/', function(req, res) {
+ connection.connect((err)=> {
+  if(err) console.log(err)
 
-app.get('/', (req, res) => {
+    let query = `SELECT *
+                 FROM users`;
+  connection.query(query , (err, result) => {
+    if(err) console.log(err)
+    let newResult = Object.keys(result).length // Checks the lenght of the result
 
-    res.send('detta funkar')
-})
-
-
+    
+    if(newResult == 0) {
+      res.status(404).json({message: 'No users exist'})
+    } else {
+      result.forEach(user => {
+        delete user.userPassword
+      })
+      res.send(result)
+      console.log(result)
+    }
+  })
+ })
+});
 
 server.listen(process.env.PORT || '3000');
