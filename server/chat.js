@@ -36,17 +36,19 @@ app.get('/', function(req, res) {
                  FROM users`;
   connection.query(query , (err, result) => {
     if(err) console.log(err)
-    let newResult = Object.keys(result).length // Checks the lenght of the result
+    
+   
 
     
-    if(newResult == 0) {
+    if(result.length == 0) {
+      console.log(result.length)
       res.status(404).json({message: 'No users exist'})
     } else {
       result.forEach(user => {
         delete user.userPassword
       })
       res.send(result)
-      console.log(result)
+      console.log(result.length)
     }
   })
  })
